@@ -22,9 +22,4 @@ public class UsuariosRequest {
     @NotNull(message = "el Campo no puede ser null")
     private String estatus;
 
-    @NotNull(message = "el Campo no puede ser null")
-    private String firma;
-
-    private String publicKey;
-
 }

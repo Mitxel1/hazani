@@ -42,19 +42,7 @@ public class UsuarioServiceimpl implements UsuarioService {
     @Override
     public UsuariosResponse usuariosResponse(UsuariosRequest request) {
         UsuariosResponse response = new UsuariosResponse();
-
         try {
-            // Generar KeyPair y KeyStore
-            String keystorePassword = generateSecurePassword();
-            KeyPairResponse keyPair = keystoreService.generateKeyPair(request.getUsername(), keystorePassword);
-
-            // Generar cadena original
-            String cadenaOriginal = String.format("||%s||%s||%s||",
-                    request.getUsername(),
-                    request.getPassword(),
-                    request.getEstatus());
-
-
             // Crear y guardar usuario
             Usuarios usuario = new Usuarios();
             usuario.setUsername(request.getUsername());
@@ -75,22 +63,12 @@ public class UsuarioServiceimpl implements UsuarioService {
             response.setCodigo("1");
             response.setMensaje("Error: " + e.getMessage());
         }
-
         return response;
     }
 
-    private String generateSecurePassword() {
-        byte[] bytes = new byte[32];
-        new SecureRandom().nextBytes(bytes);
-        return Base64.getEncoder().encodeToString(bytes);
-    }
 
     private String encodeBase64(String text) {
         return Base64.getEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8));
-    }
-
-    private String decodeBase64(String base64Text) {
-        return new String(Base64.getDecoder().decode(base64Text), StandardCharsets.UTF_8);
     }
 
     @Override

@@ -13,8 +13,6 @@ public class UsuariosResponse extends DefaulResponse {
     private String username;
     private String password;
     private Boolean estatus;
-    private String firma;
-    private String publicKey;
     private String codigo;
     private String mensaje;
 }

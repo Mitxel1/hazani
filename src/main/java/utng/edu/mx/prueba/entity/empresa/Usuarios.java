@@ -26,7 +26,7 @@ public class Usuarios {
     @Column(name = "status")
     private Boolean estatus;
 
-    @Column(name = "firma")
-    private String firma;
+    @Column(name = "role")
+    private String role;
 
 }

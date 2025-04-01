@@ -68,17 +68,4 @@ public class UsuarioController {
         }
         return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
     }
-
-    ///
-
-        @PostMapping("/validar-firma")
-        public ResponseEntity<String> validarFirma(@RequestBody UsuariosRequest usuariosRequest) {
-            boolean esValido = crytoService.validacionCadenaOriginalAltaUser(usuariosRequest);
-
-            if (esValido) {
-                return ResponseEntity.ok("Firma válida. Usuario autenticado.");
-            } else {
-                return ResponseEntity.badRequest().body("Firma inválida. Autenticación fallida.");
-            }
-        }
 }

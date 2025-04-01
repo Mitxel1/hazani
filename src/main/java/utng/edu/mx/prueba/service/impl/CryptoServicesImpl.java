@@ -22,17 +22,17 @@ public class CryptoServicesImpl implements cryptoService {
     @Value("${app.cryto.validafirma.password}")
     private String publicKeyPassword;
 
-    public boolean validacionCadenaOriginalAltaUser(UsuariosRequest usuariosRequest) {
+    public boolean validacionCadenaOriginalAltaUser(UsuariosRequest usuariosRequest, String firma) {
         StringBuilder cadenaOriginal = new StringBuilder();
         cadenaOriginal.append("||")
                 .append(usuariosRequest.getUsername()).append("||")
                 .append(usuariosRequest.getPassword()).append("||")
                 .append(usuariosRequest.getEstatus()).append("||");
 
-        return validaCadena(cadenaOriginal.toString(), usuariosRequest.getFirma(), "servicios");
+        return validaCadena(cadenaOriginal.toString(), firma, "servicios");
     }
 
-    private boolean validaCadena(String cadenaOriginal, String firma, String empresa) {
+    public boolean validaCadena(String cadenaOriginal, String firma, String empresa) {  // Ahora es público
         try {
             Signature sign = Signature.getInstance("SHA256withRSA");
             PublicKey publicKey = obtieneLlavePublica(empresa);
