@@ -17,10 +17,7 @@ import utng.edu.mx.prueba.service.cryptoService;
 
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -43,11 +40,19 @@ public class UsuarioServiceimpl implements UsuarioService {
     public UsuariosResponse usuariosResponse(UsuariosRequest request) {
         UsuariosResponse response = new UsuariosResponse();
         try {
+            // Validar el rol proporcionado
+            if (!isValidRole(request.getRole())) {
+                response.setCodigo("1");
+                response.setMensaje("Error: Rol no válido");
+                return response;
+            }
+
             // Crear y guardar usuario
             Usuarios usuario = new Usuarios();
             usuario.setUsername(request.getUsername());
             usuario.setPassword(encodeBase64(request.getPassword()));
             usuario.setEstatus(Boolean.valueOf(request.getEstatus()));
+            usuario.setRole(request.getRole().toUpperCase()); // Normalizar a mayúsculas
 
             usuario = usuariosRepositories.save(usuario);
 
@@ -55,6 +60,7 @@ public class UsuarioServiceimpl implements UsuarioService {
             response.setId(usuario.getId());
             response.setUsername(usuario.getUsername());
             response.setEstatus(usuario.getEstatus());
+            response.setRole(usuario.getRole());
             response.setCodigo("0");
             response.setMensaje("Usuario creado exitosamente");
 
@@ -64,6 +70,12 @@ public class UsuarioServiceimpl implements UsuarioService {
             response.setMensaje("Error: " + e.getMessage());
         }
         return response;
+    }
+
+    private boolean isValidRole(String role) {
+        // Lista de roles permitidos (puedes modificarla según tus necesidades)
+        Set<String> validRoles = Set.of("ADMIN", "USER");
+        return role != null && validRoles.contains(role.toUpperCase());
     }
 
 
