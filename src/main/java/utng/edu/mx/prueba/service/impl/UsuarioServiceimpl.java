@@ -10,13 +10,10 @@ import utng.edu.mx.prueba.entity.empresa.Usuarios;
 import utng.edu.mx.prueba.model.*;
 import utng.edu.mx.prueba.repositories.empresa.UsuariosRepositories;
 import utng.edu.mx.prueba.service.EncryptService;
-import utng.edu.mx.prueba.service.KeystoreService;
 import utng.edu.mx.prueba.service.UsuarioService;
 import lombok.extern.slf4j.Slf4j;
-import utng.edu.mx.prueba.service.cryptoService;
 
 import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,37 +27,54 @@ public class UsuarioServiceimpl implements UsuarioService {
     @Autowired
     private UsuariosRepositories usuariosRepositories;
 
-    @Autowired
-    private KeystoreService keystoreService;
-
-    @Autowired
-    private cryptoService crytoService;
-
     @Override
     public UsuariosResponse usuariosResponse(UsuariosRequest request) {
         UsuariosResponse response = new UsuariosResponse();
         try {
-            // Validar el rol proporcionado
+
+            if (request.getUsername() == null || request.getEmail() == null ||
+                    request.getPassword() == null || request.getRole() == null) {
+                response.setCodigo("1");
+                response.setMensaje("Error: Todos los campos son obligatorios");
+                return response;
+            }
+
+            if (!isValidEmail(request.getEmail())) {
+                response.setCodigo("1");
+                response.setMensaje("Error: Formato de email inválido");
+                return response;
+            }
+            // Validaciones adicionales
+            if (usuariosRepositories.existsByUsername(request.getUsername())) {
+                response.setCodigo("1");
+                response.setMensaje("Error: El nombre de usuario ya existe");
+                return response;
+            }
+
+            if (usuariosRepositories.existsByEmail(request.getEmail())) {
+                response.setCodigo("1");
+                response.setMensaje("Error: El email ya está registrado");
+                return response;
+            }
+
             if (!isValidRole(request.getRole())) {
                 response.setCodigo("1");
-                response.setMensaje("Error: Rol no válido");
+                response.setMensaje("Error: Rol no válido. Roles permitidos: ADMIN, USER");
                 return response;
             }
 
             // Crear y guardar usuario
             Usuarios usuario = new Usuarios();
             usuario.setUsername(request.getUsername());
+            usuario.setEmail(request.getEmail().toLowerCase()); // Guardar email en minúsculas
             usuario.setPassword(encodeBase64(request.getPassword()));
             usuario.setEstatus(Boolean.valueOf(request.getEstatus()));
-            usuario.setRole(request.getRole().toUpperCase()); // Normalizar a mayúsculas
+            usuario.setRole(request.getRole().toUpperCase());
 
             usuario = usuariosRepositories.save(usuario);
 
-            // Preparar respuesta
-            response.setId(usuario.getId());
-            response.setUsername(usuario.getUsername());
-            response.setEstatus(usuario.getEstatus());
-            response.setRole(usuario.getRole());
+            // Preparar respuesta exitosa
+            mapToResponse(usuario, response);
             response.setCodigo("0");
             response.setMensaje("Usuario creado exitosamente");
 
@@ -78,6 +92,18 @@ public class UsuarioServiceimpl implements UsuarioService {
         return role != null && validRoles.contains(role.toUpperCase());
     }
 
+    private void mapToResponse(Usuarios usuario, UsuariosResponse response) {
+        response.setId(usuario.getId());
+        response.setUsername(usuario.getUsername());
+        response.setEmail(usuario.getEmail());
+        response.setEstatus(usuario.getEstatus());
+        response.setRole(usuario.getRole());
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email != null && email.matches(emailRegex);
+    }
 
     private String encodeBase64(String text) {
         return Base64.getEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8));

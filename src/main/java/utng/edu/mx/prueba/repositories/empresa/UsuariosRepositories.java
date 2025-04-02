@@ -14,15 +14,9 @@ public interface UsuariosRepositories extends JpaRepository<Usuarios, Integer> {
     Optional<Usuarios> findByUsername(String username);
     boolean existsByUsername(String username);
 
-    // Buscar usuarios por estatus
-    Page<Usuarios> findByEstatus(Boolean estatus, Pageable pageable);
+    // Método para verificar si un email existe
+    boolean existsByEmail(String email);
 
-    // Buscar usuarios por username y estatus
-    Page<Usuarios> findByUsernameContainingIgnoreCaseAndEstatus(String username, Boolean estatus, Pageable pageable);
-
-    // Eliminar usuario por username
-    void deleteByUsername(String username);
-
-    // Contar usuarios por estatus
-    long countByEstatus(Boolean estatus);
+    // Método opcional para buscar por email
+    Optional<Usuarios> findByEmail(String email);
 }

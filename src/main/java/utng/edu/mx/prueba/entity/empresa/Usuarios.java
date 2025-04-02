@@ -17,16 +17,19 @@ public class Usuarios {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private Boolean estatus;
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private String role;
 
 }

@@ -11,6 +11,7 @@ import lombok.ToString;
 public class UsuariosResponse extends DefaulResponse {
     private Integer id;
     private String username;
+    private String email;
     private String password;
     private Boolean estatus;
     private String role;
