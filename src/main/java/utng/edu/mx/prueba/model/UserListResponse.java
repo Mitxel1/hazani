@@ -4,7 +4,7 @@ package utng.edu.mx.prueba.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import utng.edu.mx.prueba.entity.empresa.Usuarios;
+
 import java.util.List;
 
 @Getter

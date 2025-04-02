@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @Table(name = "usuarios")
 @Entity
-public class Usuarios {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seqUsuario")
     @SequenceGenerator(name = "seqUsuario", sequenceName = "usuario_id_seq", allocationSize = 1)

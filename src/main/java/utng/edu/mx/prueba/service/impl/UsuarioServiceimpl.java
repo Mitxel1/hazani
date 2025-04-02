@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import utng.edu.mx.prueba.entity.empresa.Usuarios;
+import utng.edu.mx.prueba.entity.empresa.Usuario;
 import utng.edu.mx.prueba.model.*;
 import utng.edu.mx.prueba.repositories.empresa.UsuariosRepositories;
 import utng.edu.mx.prueba.service.EncryptService;
@@ -64,7 +64,7 @@ public class UsuarioServiceimpl implements UsuarioService {
             }
 
             // Crear y guardar usuario
-            Usuarios usuario = new Usuarios();
+            Usuario usuario = new Usuario();
             usuario.setUsername(request.getUsername());
             usuario.setEmail(request.getEmail().toLowerCase()); // Guardar email en minúsculas
             usuario.setPassword(encodeBase64(request.getPassword()));
@@ -92,7 +92,7 @@ public class UsuarioServiceimpl implements UsuarioService {
         return role != null && validRoles.contains(role.toUpperCase());
     }
 
-    private void mapToResponse(Usuarios usuario, UsuariosResponse response) {
+    private void mapToResponse(Usuario usuario, UsuariosResponse response) {
         response.setId(usuario.getId());
         response.setUsername(usuario.getUsername());
         response.setEmail(usuario.getEmail());
@@ -116,7 +116,7 @@ public class UsuarioServiceimpl implements UsuarioService {
             int pagina = (int) request.getPagina();
             Pageable pageable = PageRequest.of(pagina, request.getTamañoPagina());
 
-            Page<Usuarios> usuarios;
+            Page<Usuario> usuarios;
             if (request.getUsername() != null && !request.getUsername().isEmpty()) {
                 usuarios = usuariosRepositories.findByUsernameContainingIgnoreCase(
                         request.getUsername(), pageable);
@@ -151,10 +151,10 @@ public class UsuarioServiceimpl implements UsuarioService {
     public UsuariosResponse updateUser(UpdateUserRequest request) {
         UsuariosResponse response = new UsuariosResponse();
         try {
-            Optional<Usuarios> usuarioOpt = usuariosRepositories.findById(request.getId());
+            Optional<Usuario> usuarioOpt = usuariosRepositories.findById(request.getId());
 
             if (usuarioOpt.isPresent()) {
-                Usuarios usuario = usuarioOpt.get();
+                Usuario usuario = usuarioOpt.get();
 
                 if (request.getUsername() != null) {
                     usuario.setUsername(request.getUsername());
