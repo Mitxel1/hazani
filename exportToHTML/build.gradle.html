@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>build.gradle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+build.gradle</font>
+</center></td></tr></table>
+<pre><span class="s0">plugins </span><span class="s1">{</span>
+
+    <span class="s0">id </span><span class="s2">'jacoco'</span>
+    <span class="s0">id </span><span class="s2">'io.spring.dependency-management' </span><span class="s0">version </span><span class="s2">'1.1.0'</span>
+    <span class="s0">id </span><span class="s2">'org.springframework.boot' </span><span class="s0">version </span><span class="s2">'3.2.0'</span><span class="s3">//Versión de componentes de spring boot</span>
+    <span class="s0">id </span><span class="s2">'org.sonarqube' </span><span class="s0">version </span><span class="s2">'4.0.0.2929'</span>
+    <span class="s0">id </span><span class="s2">&quot;org.owasp.dependencycheck&quot; </span><span class="s0">version </span><span class="s2">&quot;8.1.2&quot;</span>
+    <span class="s0">id </span><span class="s2">'com.github.ben-manes.versions' </span><span class="s0">version </span><span class="s2">'0.46.0'</span>
+    <span class="s0">id </span><span class="s2">'java'</span>
+<span class="s1">}</span>
+
+
+<span class="s0">group </span><span class="s1">= </span><span class="s2">'com.utng.edu.prueba'</span>
+<span class="s0">version </span><span class="s1">= </span><span class="s2">'1.0-SNAPSHOT'</span>
+
+
+<span class="s0">java</span><span class="s1">{</span>
+    <span class="s0">sourceCompatibility</span><span class="s1">=</span><span class="s4">17</span>
+    <span class="s0">targetCompatibility</span><span class="s1">=</span><span class="s4">17</span>
+<span class="s1">}</span>
+
+<span class="s0">repositories </span><span class="s1">{</span>
+    <span class="s0">mavenCentral</span><span class="s1">()</span>
+<span class="s1">}</span>
+
+
+<span class="s0">dependencies </span><span class="s1">{</span>
+
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-web:3.1.2'</span>
+    <span class="s0">implementation </span><span class="s2">'org.postgresql:postgresql:42.6.0'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.cloud:spring-cloud-config-client:4.0.1'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-validation:3.1.2'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'</span>
+
+    <span class="s0">implementation </span><span class="s2">'com.h2database:h2'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-mail:2.7.5'</span>
+
+    <span class="s3">// implementation &quot;org.springframework.boot:spring-boot-starter-data-jpa&quot;</span>
+    <span class="s0">implementation </span><span class="s2">'io.lettuce:lettuce-core:6.2.3.RELEASE'</span>
+    <span class="s3">// implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'</span>
+    <span class="s0">implementation </span><span class="s2">'com.google.code.gson:gson:2.10.1'</span>
+    <span class="s3">//se actualiza 20230618</span>
+    <span class="s0">implementation </span><span class="s2">'org.json:json:20230618'</span>
+    <span class="s0">implementation </span><span class="s2">'org.projectlombok:lombok:1.18.26'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-cache:3.1.2'</span>
+    <span class="s0">implementation </span><span class="s2">'io.jsonwebtoken:jjwt:0.9.1'</span>
+    <span class="s0">implementation </span><span class="s2">'com.auth0:jwks-rsa:0.22.0'</span>
+    <span class="s3">//actualizo a 4,4</span>
+    <span class="s0">implementation </span><span class="s2">'com.auth0:java-jwt:4.4.0'</span>
+    <span class="s0">implementation group: </span><span class="s2">'org.apache.commons'</span><span class="s0">, name: </span><span class="s2">'commons-lang3'</span><span class="s0">, version: </span><span class="s2">'3.12.0'</span>
+    <span class="s3">// implementation 'javax.mail:mail:1.5.0-b01'</span>
+    <span class="s3">//   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.4'</span>
+    <span class="s3">//actualizo a version 23.2.0.0</span>
+    <span class="s0">implementation </span><span class="s2">'com.oracle.database.jdbc:ojdbc8:23.2.0.0'</span>
+    <span class="s0">implementation </span><span class="s2">'com.oracle.database.jdbc:ucp:23.2.0.0'</span>
+
+
+    <span class="s3">// se actualizo a 1.5</span>
+    <span class="s0">implementation </span><span class="s2">'commons-fileupload:commons-fileupload:1.5'</span>
+    <span class="s0">implementation </span><span class="s2">'org.apache.httpcomponents:httpclient:4.5.14'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-web'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-freemarker'</span>
+    <span class="s3">//  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'</span>
+    <span class="s0">implementation </span><span class="s2">&quot;org.springframework.boot:spring-boot-starter-data-jpa:3.1.2&quot;</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-actuator'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.cloud:spring-cloud-config-client:4.0.3'</span>
+    <span class="s3">// se actualiza a 4.0.3</span>
+    <span class="s0">implementation </span><span class="s2">'org.glassfish.jaxb:jaxb-runtime:4.0.3'</span>
+    <span class="s0">implementation </span><span class="s2">'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'</span>
+    <span class="s0">implementation </span><span class="s2">'com.google.code.gson:gson:2.10.1'</span>
+
+    <span class="s0">implementation </span><span class="s2">'org.postgresql:postgresql:42.5.2'</span>
+    <span class="s3">//actualiza a version 2.13</span>
+    <span class="s0">implementation </span><span class="s2">'commons-io:commons-io:2.13.0'</span>
+    <span class="s0">implementation </span><span class="s2">'javax.validation:validation-api:2.0.1.Final'</span>
+    <span class="s3">//implementation 'javax.mail:mail:1.5.0-b01'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-validation'</span>
+    <span class="s3">//actualiza 6.2.5</span>
+    <span class="s0">implementation </span><span class="s2">'io.lettuce:lettuce-core:6.2.5.RELEASE'</span>
+    <span class="s0">implementation </span><span class="s2">'com.google.api-client:google-api-client:2.2.0'</span>
+    <span class="s0">implementation </span><span class="s2">'org.apache.commons:commons-lang3:3.12.0'</span>
+    <span class="s3">//se actualiza a la version 6.2.7.Final'</span>
+    <span class="s0">implementation </span><span class="s2">'org.hibernate:hibernate-core:6.2.7.Final'</span>
+    <span class="s0">implementation </span><span class="s2">'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'</span>
+    <span class="s3">//se actualizo 6.6.0.202305301015-r</span>
+    <span class="s0">implementation </span><span class="s2">'org.eclipse.jgit:org.eclipse.jgit:6.6.0.202305301015-r'</span>
+    <span class="s0">implementation </span><span class="s2">'com.google.api-client:google-api-client-jackson2:2.2.0'</span>
+    <span class="s0">implementation </span><span class="s2">'jakarta.mail:jakarta.mail-api:2.1.1'</span>
+    <span class="s0">implementation </span><span class="s2">'org.eclipse.angus:angus-mail:2.0.1'</span>
+    <span class="s3">//actualiza a 2.2.0</span>
+    <span class="s0">implementation </span><span class="s2">'org.apache.opennlp:opennlp-tools:2.2.0'</span>
+    <span class="s0">compileOnly </span><span class="s2">'org.projectlombok:lombok:1.18.30'</span>
+    <span class="s0">annotationProcessor </span><span class="s2">'org.projectlombok:lombok:1.18.30'</span>
+    <span class="s0">testCompileOnly </span><span class="s2">'org.projectlombok:lombok:1.18.30'</span>
+    <span class="s0">testAnnotationProcessor </span><span class="s2">'org.projectlombok:lombok:1.18.30'</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-test'</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.mockito:mockito-inline:5.1.1'</span>
+    <span class="s0">testImplementation</span><span class="s1">(</span><span class="s2">'org.mockito:mockito-core:5.1.1'</span><span class="s1">)</span>
+    <span class="s3">//aqui el error</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.junit.jupiter:junit-jupiter-api:5.9.2'</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.junit.jupiter:junit-jupiter-engine:5.9.2'</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.junit.platform:junit-platform-runner:1.9.2'</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.junit.platform:junit-platform-launcher:1.9.2'</span>
+
+
+
+
+
+    <span class="s0">compileOnly </span><span class="s2">'org.projectlombok:lombok:1.18.30'</span>
+    <span class="s0">annotationProcessor </span><span class="s2">'org.projectlombok:lombok:1.18.30'</span>
+    <span class="s0">testCompileOnly </span><span class="s2">'org.projectlombok:lombok:1.18.26'</span>
+    <span class="s0">testAnnotationProcessor </span><span class="s2">'org.projectlombok:lombok:1.18.30'</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.springframework.boot:spring-boot-starter-test:3.1.2'</span>
+
+    <span class="s0">testImplementation group: </span><span class="s2">'org.junit.jupiter'</span><span class="s0">, name: </span><span class="s2">'junit-jupiter-api'</span><span class="s0">, version: </span><span class="s2">'5.9.2'</span>
+    <span class="s0">testImplementation group: </span><span class="s2">'org.junit.jupiter'</span><span class="s0">, name: </span><span class="s2">'junit-jupiter-engine'</span><span class="s0">, version: </span><span class="s2">'5.9.2'</span>
+    <span class="s3">//actualiza a 2.2.220</span>
+    <span class="s0">testImplementation group: </span><span class="s2">'com.h2database'</span><span class="s0">, name: </span><span class="s2">'h2'</span><span class="s0">, version: </span><span class="s2">'2.2.220'</span>
+    <span class="s0">testImplementation </span><span class="s2">'org.mockito:mockito-inline:5.2.0'</span>
+<span class="s1">}</span>
+
+<span class="s0">configurations.all </span><span class="s1">{</span>
+    <span class="s0">exclude group: </span><span class="s2">&quot;org.apache.logging.log4j&quot;</span><span class="s0">, module: </span><span class="s2">&quot;log4j-api&quot;</span>
+    <span class="s0">exclude group: </span><span class="s2">&quot;org.apache.logging.log4j&quot;</span><span class="s0">, module: </span><span class="s2">&quot;log4j-to-slf4j&quot;</span>
+    <span class="s0">exclude group: </span><span class="s2">&quot;log4j&quot;</span><span class="s0">, module: </span><span class="s2">&quot;log4j&quot;</span>
+<span class="s1">}</span>
+
+<span class="s0">test </span><span class="s1">{</span>
+    <span class="s0">useJUnitPlatform</span><span class="s1">()</span>
+<span class="s1">}</span>
+
+<span class="s0">springBoot </span><span class="s1">{</span>
+    <span class="s0">buildInfo </span><span class="s1">{</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
